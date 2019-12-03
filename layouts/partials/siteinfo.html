@@ -2,7 +2,7 @@
 <aside class="p-author">
   {{ with .Site.Params.avatar }}
   <div class="c-avatar p-author__avatar">
-    <img alt="Author Avatar" src="{{ . }}" />
+    <a href = "https://methodsconsultants.com"><img alt="Author Avatar" src="{{ . }}" /></a>
   </div>
   {{ end }}
   {{ if or ( .Site.Params.author ) ( .Site.Params.bio ) ( .Site.Params.contact ) }}
@@ -15,9 +15,12 @@
     {{ end }}
     {{ with .Site.Params.contact }}
     <p>
-      <a href="{{ . }}">
+      <a href = "https://methodsconsultants.com">Main Site</a>
+      &nbsp;&bull;&nbsp;
+      <a href = "https://methodsconsultants.com/contact">Contact Us</a>
+      <!--<a href="{{ . }}">
         Contact me
-      </a>
+      </a>-->
     </p>
     {{ end }}
   </div>

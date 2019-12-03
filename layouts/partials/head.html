@@ -1,4 +1,7 @@
 <head>
+  {{ if .Data.Singular }}
+  <meta name="robots" content="noindex">
+  {{ end }}
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   {{ with .Title | default .Site.Title }}
@@ -36,23 +39,16 @@
   {{ else }}
   <meta property="og:type" content="website" />
   {{ end }}
-  <!-- Hugo Version Number -->
-  {{ hugo.Generator -}}
-  
+  <!-- Hugo Version number -->
+  {{ .Hugo.Generator -}}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css" />
-  <!-- Custom css files as define in config.toml -->
-  {{ range .Site.Params.custom_css -}}
-    <link rel="stylesheet" href="{{ . | absURL }}">
-  {{- end }}
   {{- with .Site.Params.favicon }}
   <link rel='icon' type='image/x-icon' href="{{ . | absURL }}" />
   {{- end -}}
-  {{ if eq .RelPermalink "/" }}
-  {{ with .OutputFormats.Get "RSS" -}}
-  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
-  {{ end -}}
+  {{ if eq .URL "/" }}
+  <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
   {{ end }}
-  {{ if .Params.mathjax }}{{ partial "mathjax_support.html" . }}{{ end }}
   <script type="text/javascript" src="{{ .Site.BaseURL }}js/bundle.js"></script>
   {{ partial "head_custom.html" . }}
 </head>
