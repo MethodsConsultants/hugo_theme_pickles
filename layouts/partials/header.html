@@ -10,15 +10,15 @@
     {{ else }}
     <h1 class="c-title p-title"><a href="{{ .Site.BaseURL }}" class="p-title__link">{{ .Site.Title }}</a></h1>
     {{ end }}
-    {{ with .Site.Params.avatar }}
+    {{ with .Site.Params.logo_horizontal }}
     <a href = "https://methodsconsultants.com">
-      <img alt="Logo" src="{{ . }}" width = "300px"/>
+      <img alt="Logo" src="{{ . }}" width = "500"/>
     </a>
     {{ end }}
-    {{ with .Site.Params.subtitle }}
-    <p class="p-subtitle" style = "font-size: 2em">
-      {{ . }}
-    </p>
+    {{ if .IsPage }}
+    <p class="p-subtitle" style = "font-size: 2em"><a href = "https://methodsconsultants.com">{{ .Site.Params.subtitle }}</a></p>
+    {{ else }}
+    <h2 class="p-subtitle" style = "font-size: 2em"><a href = "https://methodsconsultants.com">{{ .Site.Params.subtitle }}</a></h2>
     {{ end }}
   </header>
   <main id="main" class="l-main">
