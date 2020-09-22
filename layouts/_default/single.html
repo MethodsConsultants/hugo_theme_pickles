@@ -2,8 +2,16 @@
 {{ $baseurl := .Site.BaseURL | sanitizeurl }}
 <article class="p-article">
   <header>
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Params.h1 }}</h1>
     <div>
+      <div class="c-author">
+        {{ if isset .Params "author" }}
+        {{ $author := index .Site.Data.authors (.Params.author) }}
+        {{ with $author.name }}
+        <p class="c-author">{{ . }}</p>
+        {{ end }}
+        {{ end }}
+      </div>
       <div class="c-time">
         Posted on
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
@@ -22,6 +30,8 @@
     {{ .Content }}
   </section>
   <footer>
+    {{ partial "authorinfo.html" . }}
+    <br> <br> <br> <br>
     {{ with .Site.Params.disqus }}
     <div id="disqus_thread"></div>
     <script>
@@ -38,20 +48,19 @@
     <nav class="p-pagination c-pagination">
       <div class="c-pagination__ctrl">
         <div class="c-pagination__newer">
-          {{ if .NextPage }}
-          <a href="{{ .NextPage.Permalink }}">Newer</a>
+          {{ if .Prev }}
+          <a href="{{ .Prev.Permalink }}">Newer</a>
           {{ else }}
           {{ end }}
         </div>
         <div class="c-pagination__older">
-          {{ if .PrevPage }}
-          <a href="{{ .PrevPage.Permalink }}">Older</a>
+          {{ if .Next }}
+          <a href="{{ .Next.Permalink }}">Older</a>
           {{ else }}
           {{ end }}
         </div>
       </div>
     </nav>
-    {{ partial "related.html" . }}
     {{ partial "siteinfo.html" . }}
   </footer>
 </article>
